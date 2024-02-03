@@ -27,3 +27,16 @@ export function shouldFollowLink(event: MouseEvent, link: HTMLAnchorElement) {
 
   return targetsCurrentWindow && isRegularClick && !downloadable
 }
+
+/**
+ * Open the link by opening a new window.
+ * Respect the user's preferences by using the target attribute and the rel attribute.
+ */
+export function openLink(link: HTMLAnchorElement) {
+  const href = link.getAttribute('href') || ''
+  const target = link.getAttribute('target') || '_self'
+  const rel = link.getAttribute('rel') || ''
+
+  const windowFeatures = rel.split(' ').join(',')
+  window.open(href, target, windowFeatures)
+}

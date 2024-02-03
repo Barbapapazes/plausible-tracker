@@ -1,5 +1,5 @@
 import type { EventOptions, Plausible } from '../index'
-import { isOutboundLink, shouldFollowLink } from './utils'
+import { isOutboundLink, openLink, shouldFollowLink } from './utils'
 
 export function useAutoOutboundTracking(plausible: Plausible, initOptions?: EventOptions) {
   const options: EventOptions = { ...initOptions }
@@ -31,11 +31,7 @@ export function useAutoOutboundTracking(plausible: Plausible, initOptions?: Even
     const followLink = () => {
       if (!followedLink) {
         followedLink = true
-        const target = this.getAttribute('target') || '_self'
-        const rel = this.getAttribute('rel') || ''
-
-        const windowFeatures = rel.split(' ').join(',')
-        window.open(href, target, windowFeatures)
+        openLink(this)
       }
     }
 

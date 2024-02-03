@@ -1,7 +1,21 @@
 import type { EventOptions, Plausible } from '../index'
-import { shouldFollowLink } from './utils'
+import { openLink, shouldFollowLink } from './utils'
 
-export function useAutoFileDownloadsTracking(plausible: Plausible, initOptions?: EventOptions) {
+export interface AutoFileDownloadsTrackingOptions {
+  /**
+   * File types to track.
+   */
+  fileTypes: string[]
+}
+
+/**
+ * Default file types to track.
+ * @see https://plausible.io/docs/file-downloads-tracking#which-file-types-are-tracked
+ */
+export const defaultFileTypes = ['pdf', 'xlsx', 'docx', 'txt', 'rtf', 'csv', 'exe', 'key', 'pps', 'ppt', 'pptx', '7z', 'pkg', 'rar', 'gz', 'zip', 'avi', 'mov', 'mp4', 'mpeg', 'wmv', 'midi', 'mp3', 'wav', 'wma']
+
+export function useAutoFileDownloadsTracking(plausible: Plausible, extensionOptions: AutoFileDownloadsTrackingOptions, initOptions?: EventOptions) {
+  const fileTypes = extensionOptions.fileTypes
   const options: EventOptions = { ...initOptions }
   const tracked = new Set<HTMLAnchorElement>()
 
@@ -21,10 +35,8 @@ export function useAutoFileDownloadsTracking(plausible: Plausible, initOptions?:
       return
 
     const pathname = this.pathname
-    if (!isDownloadToTrack(pathname))
+    if (!isDownloadToTrack(pathname, fileTypes))
       return
-
-    // There is an href since it's an outbound link.
 
     // Avoid to retrigger a navigation if trackEvent callback is called but setTimeout trigger at the same time.
     let followedLink = false
@@ -33,12 +45,7 @@ export function useAutoFileDownloadsTracking(plausible: Plausible, initOptions?:
     const followLink = () => {
       if (!followedLink) {
         followedLink = true
-        const href = this.getAttribute('href') || ''
-        const target = this.getAttribute('target') || '_self'
-        const rel = this.getAttribute('rel') || ''
-
-        const windowFeatures = rel.split(' ').join(',')
-        window.open(href, target, windowFeatures)
+        openLink(this)
       }
     }
 
@@ -143,9 +150,10 @@ export function useAutoFileDownloadsTracking(plausible: Plausible, initOptions?:
   }
 }
 
-const defaultFileTypes = ['pdf', 'xlsx', 'docx', 'txt', 'rtf', 'csv', 'exe', 'key', 'pps', 'ppt', 'pptx', '7z', 'pkg', 'rar', 'gz', 'zip', 'avi', 'mov', 'mp4', 'mpeg', 'wmv', 'midi', 'mp3', 'wav', 'wma', 'svg']
-
-function isDownloadToTrack(url: string) {
+/**
+ * Determine if a link is a download to track.
+ */
+function isDownloadToTrack(url: string, fileTypes: string[]) {
   if (!url)
     return false
 
@@ -154,5 +162,5 @@ function isDownloadToTrack(url: string) {
   if (!fileType)
     return false
 
-  return defaultFileTypes.includes(fileType)
+  return fileTypes.includes(fileType)
 }
