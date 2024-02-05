@@ -3,7 +3,7 @@
  * @see https://github.com/plausible/analytics/blob/master/tracker/src/customEvents.js#L77
  */
 
-import { sendEvent as _sendEvent, createEventData, isBlackListed, isFile, isUserExcludeItself } from './event'
+import { sendEvent as _sendEvent, createEventData, isIgnored, isFile, isUserSelfExcluded } from './event'
 import { createPayload } from './payload'
 import type { EventName, EventOptions, EventPayload, Plausible, PlausibleOptions } from './types'
 
@@ -42,7 +42,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
     const payload = createPayload(eventName, plausibleOptions, data, options)
 
     // Ignore events if the protocol is file, the hostname is blacklisted or the user exclude itself.
-    if (isFile(protocol) || isBlackListed(plausibleOptions.domain, plausibleOptions.blackListedDomains) || isUserExcludeItself()) {
+    if (isFile(protocol) || isIgnored(plausibleOptions.domain, plausibleOptions.blackListedDomains) || isUserSelfExcluded()) {
       // Only log ignored events if the option is enabled.
       if (!plausibleOptions.logIgnored)
         // eslint-disable-next-line no-console
