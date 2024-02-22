@@ -30,7 +30,7 @@ export function useAutoFileDownloadsTracking(plausible: Plausible, extensionOpti
     /** The anchor element */
     this: HTMLAnchorElement,
     /** The click event */
-    event: MouseEvent
+    event: MouseEvent,
   ) {
     // If not left click and not middle click, do nothing.
     if ((event.type === 'auxclick' && event.button !== 1))
@@ -68,7 +68,7 @@ export function useAutoFileDownloadsTracking(plausible: Plausible, extensionOpti
    */
   function addNode(
     /** The node to add */
-    node: Node | ParentNode
+    node: Node | ParentNode,
   ) {
     if (node instanceof HTMLAnchorElement) {
       // Downloaded files hosted on the same domain otherwise it's handled by the extension `useAutoOutboundTracking`.
@@ -88,7 +88,7 @@ export function useAutoFileDownloadsTracking(plausible: Plausible, extensionOpti
    */
   function removeNode(
     /** The node to remove */
-    node: Node | ParentNode
+    node: Node | ParentNode,
   ) {
     if (node instanceof HTMLAnchorElement) {
       node.removeEventListener('click', handleLinkClickEvent)

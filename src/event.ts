@@ -7,7 +7,7 @@ import type { EventData, EventPayload } from './types'
  */
 export function isFile(
   /** The current protocol */
-  protocol: string
+  protocol: string,
 ): boolean {
   return protocol === 'file:'
 }
@@ -21,7 +21,7 @@ export function isIgnored(
   /** The current hostname */
   hostname: string,
   /** Hostnames to ignore */
-  ignoredHostnames: string[]
+  ignoredHostnames: string[],
 ): boolean {
   return ignoredHostnames.includes(hostname)
 }
@@ -48,7 +48,7 @@ export function isUserSelfExcluded(): boolean {
  */
 export function createEventData(
   /** The event data */
-  data: Partial<EventData> = {}
+  data: Partial<EventData> = {},
 ): EventData {
   const { url, referrer, deviceWidth } = data
 
@@ -67,7 +67,7 @@ export function sendEvent(
   apiHost: string,
   /** The event payload */
   payload: EventPayload,
-  callback?: () => void
+  callback?: () => void,
 ) {
   return fetch(`${apiHost}/api/event`, {
     method: 'POST',

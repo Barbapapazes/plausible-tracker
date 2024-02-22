@@ -15,8 +15,8 @@ export function useAutoOutboundTracking(plausible: Plausible, initOptions?: Even
   function handleLinkClickEvent(
     /** The anchor element */
     this: HTMLAnchorElement,
-     /** The click event */
-    event: MouseEvent
+    /** The click event */
+    event: MouseEvent,
   ) {
     const location = window.location as (Location & string) as string
     // If not left click and not middle click, do nothing.
@@ -54,7 +54,7 @@ export function useAutoOutboundTracking(plausible: Plausible, initOptions?: Even
    */
   function addNode(
     /** The node to add */
-    node: Node | ParentNode
+    node: Node | ParentNode,
   ) {
     if (node instanceof HTMLAnchorElement) {
       if (node.host !== location.host) {
@@ -73,7 +73,7 @@ export function useAutoOutboundTracking(plausible: Plausible, initOptions?: Even
    */
   function removeNode(
     /** The node to remove */
-    node: Node | ParentNode
+    node: Node | ParentNode,
   ) {
     if (node instanceof HTMLAnchorElement) {
       node.removeEventListener('click', handleLinkClickEvent)
