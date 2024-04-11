@@ -23,7 +23,7 @@ export function isIgnored(
   /** Hostnames to ignore */
   ignoredHostnames: string[],
 ): boolean {
-  return ignoredHostnames.some(ignoredHostname => hostname.endsWith(ignoredHostname));
+  return ignoredHostnames.some(ignoredHostname => hostname === ignoredHostname || hostname.endsWith('.' + ignoredHostname))
 }
 
 /**
