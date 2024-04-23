@@ -22,7 +22,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
     hashMode: false,
     domain: location.hostname,
     apiHost: 'https://plausible.io',
-    ignoredHostnames: ['localhost'],
+    ignoredHostnames: ['localhost', 'test'],
     logIgnored: false,
   }
 
