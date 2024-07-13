@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { isUserSelfExcluded, createEventData, sendEvent } from '../src/event'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { createEventData, isUserSelfExcluded, sendEvent } from '../src/event'
 
 describe('`isUserSelfExcluded`', () => {
   beforeEach(() => {
@@ -23,9 +23,9 @@ describe('`createEventData`', () => {
     // @ts-expect-error - Mocking the location object
     vi.spyOn(window, 'location', 'get').mockReturnValue({
       href: 'http://example.com',
-     })
-     vi.spyOn(document, 'referrer', 'get').mockReturnValue('http://referrer.com')
-     vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(1920)
+    })
+    vi.spyOn(document, 'referrer', 'get').mockReturnValue('http://referrer.com')
+    vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(1920)
   })
 
   it('should use the href of the current location as the default URL', () => {

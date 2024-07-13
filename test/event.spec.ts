@@ -1,5 +1,5 @@
-import { describe, it, expect } from 'vitest'
-import { isFile, isIgnored, isUserSelfExcluded, createEventData } from '../src/event'
+import { describe, expect, it } from 'vitest'
+import { createEventData, isFile, isIgnored, isUserSelfExcluded } from '../src/event'
 
 describe('`isFile`', () => {
   it('should return true if the protocol is `file:`', () => {

@@ -1,6 +1,6 @@
-import { describe, it, expect } from 'vitest'
+import { describe, expect, it } from 'vitest'
 import { createPayload } from '../src/payload'
-import { PlausibleOptions } from '../src/types'
+import type { PlausibleOptions } from '../src/types'
 
 describe('payload', () => {
   const plausibleOptions: Required<PlausibleOptions> = {
@@ -15,7 +15,7 @@ describe('payload', () => {
   const data = {
     url: 'http://example.com',
     referrer: 'http://referrer.com',
-    deviceWidth: 1920
+    deviceWidth: 1920,
   }
 
   it('should be correctly formed', () => {
@@ -28,7 +28,7 @@ describe('payload', () => {
       r: 'http://referrer.com',
       w: 1920,
       h: 0,
-      p: undefined
+      p: undefined,
     })
   })
 
@@ -42,7 +42,7 @@ describe('payload', () => {
       r: 'http://referrer.com',
       w: 1920,
       h: 0,
-      p: '{"key":"value"}'
+      p: '{"key":"value"}',
     })
   })
 
@@ -56,7 +56,7 @@ describe('payload', () => {
       r: 'http://referrer.com',
       w: 1920,
       h: 1,
-      p: undefined
+      p: undefined,
     })
   })
 })
