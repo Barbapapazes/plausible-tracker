@@ -16,13 +16,13 @@ export function isOutboundLink(link: HTMLAnchorElement, currentHostname: string)
  * @param link - Link
  * @returns - If the link should be followed
  */
-export function shouldFollowLink(event: MouseEvent, link: HTMLAnchorElement) {
+export function shouldFollowLink(event: MouseEvent, link: HTMLAnchorElement): boolean {
   // If default has been prevented by an external script, Plausible should not intercept navigation.
   if (event.defaultPrevented)
     return false
 
   const downloadable = link.hasAttribute('download')
-  const targetsCurrentWindow = !link.target || link.target.match(/^_(self|parent|top)$/i)
+  const targetsCurrentWindow = !link.target || Boolean(link.target.match(/^_(self|parent|top)$/i))
   const isRegularClick = !(event.ctrlKey || event.metaKey || event.shiftKey) && event.type === 'click'
 
   return targetsCurrentWindow && isRegularClick && !downloadable
