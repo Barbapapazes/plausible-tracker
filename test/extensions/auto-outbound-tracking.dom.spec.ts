@@ -1,4 +1,3 @@
-import { nextTick } from 'node:process'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import type { Plausible } from '../../src'
 import { createPlausibleTracker } from '../../src'
