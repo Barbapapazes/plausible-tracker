@@ -1,8 +1,12 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createEventData, isUserSelfExcluded, sendEvent } from '../src/event'
 
 describe('`isUserSelfExcluded`', () => {
   beforeEach(() => {
+    localStorage.clear()
+  })
+
+  afterAll(() => {
     localStorage.clear()
   })
 
@@ -19,13 +23,16 @@ describe('`isUserSelfExcluded`', () => {
 
 describe('`createEventData`', () => {
   beforeEach(() => {
-    vi.resetAllMocks()
     // @ts-expect-error - Mocking the location object
     vi.spyOn(window, 'location', 'get').mockReturnValue({
       href: 'http://example.com',
     })
     vi.spyOn(document, 'referrer', 'get').mockReturnValue('http://referrer.com')
     vi.spyOn(window, 'innerWidth', 'get').mockReturnValue(1920)
+  })
+
+  afterEach(() => {
+    vi.resetAllMocks()
   })
 
   it('should use the href of the current location as the default URL', () => {
@@ -70,8 +77,11 @@ describe('`createEventData`', () => {
 
 describe('`sendEvent`', () => {
   beforeEach(() => {
-    vi.resetAllMocks()
     vi.spyOn(window, 'fetch').mockResolvedValue({} as Response)
+  })
+
+  afterEach(() => {
+    vi.resetAllMocks()
   })
 
   it('should send an event with the payload to the API `/api/event`', async () => {

@@ -56,7 +56,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
       options?.callback?.()
     }
     else {
-      sendEvent(payload, options?.callback)
+      return sendEvent(payload, options?.callback)
     }
   }
 
@@ -64,7 +64,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
    * Send a pageview event.
    */
   function trackPageview(options?: EventOptions) {
-    trackEvent('pageview', options)
+    return trackEvent('pageview', options)
   }
 
   return {
