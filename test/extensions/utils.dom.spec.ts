@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { isOutboundLink, openLink, shouldFollowLink } from '../../src/extensions/utils'
 
 describe('extensions utils', () => {
@@ -101,6 +101,14 @@ describe('extensions utils', () => {
   })
 
   describe('`openLink`', () => {
+    beforeEach(() => {
+      vi.stubGlobal('open', vi.fn())
+    })
+
+    afterEach(() => {
+      vi.unstubAllGlobals()
+    })
+
     it('should open the link in the same window', () => {
       const link = document.createElement('a')
       link.href = 'http://example.com'
