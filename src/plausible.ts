@@ -15,12 +15,12 @@ import type { EventName, EventOptions, EventPayload, Plausible, PlausibleOptions
  * @returns Plausible tracker
  */
 export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) {
-  const protocol = location.protocol
+  const protocol = window.location.protocol
 
   const defaultOptions: PlausibleOptions = {
     enabled: true,
     hashMode: false,
-    domain: location.hostname,
+    domain: window.location.hostname,
     apiHost: 'https://plausible.io',
     ignoredHostnames: ['localhost'],
     ignoreSubDomains: false,

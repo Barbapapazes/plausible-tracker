@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { createEventData, isFile, isIgnored, isUserSelfExcluded } from '../src/event'
 
 describe('`isFile`', () => {
-  it('should return true if the protocol is `file:`', () => {
+  it('should return `true` if the protocol is `file:`', () => {
     expect(isFile('file:')).toBe(true)
   })
 
@@ -15,17 +15,17 @@ describe('`isFile`', () => {
     ['data:'],
     ['blob:'],
     ['mailto:'],
-  ])('should return false if the protocol is `%s`', (protocol) => {
+  ])('should return `false` if the protocol is `%s`', (protocol) => {
     expect(isFile(protocol)).toBe(false)
   })
 })
 
 describe('`isIgnored`', () => {
-  it('should return true if the hostname is ignored', () => {
+  it('should return `true` if the hostname is ignored', () => {
     expect(isIgnored('example.com', ['example.com'], false)).toBe(true)
   })
 
-  it('should return false if the hostname is not ignored', () => {
+  it('should return `false` if the hostname is not ignored', () => {
     expect(isIgnored('example.com', ['example.org'], false)).toBe(false)
   })
 
@@ -39,7 +39,8 @@ describe('`isIgnored`', () => {
 })
 
 describe('`isUserSelfExcluded`', () => {
-  it('should return false if `localStorage` is not available', () => {
+  it('should return `false` if `localStorage` is not available', () => {
+    expect(globalThis.localStorage).toBeUndefined()
     expect(isUserSelfExcluded()).toBe(false)
   })
 })

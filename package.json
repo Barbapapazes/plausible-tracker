@@ -54,7 +54,9 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.16.0",
+    "@playwright/test": "^1.45.1",
     "@types/node": "^18.19.31",
+    "@vitest/coverage-v8": "^2.0.3",
     "bumpp": "^9.4.0",
     "eslint": "^8.57.0",
     "happy-dom": "^13.10.1",

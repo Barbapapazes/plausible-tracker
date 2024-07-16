@@ -1,12 +1,9 @@
-import { afterAll, afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createEventData, isUserSelfExcluded, sendEvent } from '../src/event'
+import type { EventPayload } from '../src/types'
 
 describe('`isUserSelfExcluded`', () => {
-  beforeEach(() => {
-    localStorage.clear()
-  })
-
-  afterAll(() => {
+  afterEach(() => {
     localStorage.clear()
   })
 
@@ -17,6 +14,8 @@ describe('`isUserSelfExcluded`', () => {
   })
 
   it('should return `false` if the key `plausible_ignore` is not set', () => {
+    localStorage.removeItem('plausible_ignore')
+
     expect(isUserSelfExcluded()).toBe(false)
   })
 })
@@ -76,6 +75,15 @@ describe('`createEventData`', () => {
 })
 
 describe('`sendEvent`', () => {
+  const eventPayload: EventPayload = {
+    n: 'test',
+    u: 'http://example.com',
+    d: 'example.com',
+    r: 'http://referrer.com',
+    w: 1920,
+    h: 0,
+  }
+
   beforeEach(() => {
     vi.spyOn(window, 'fetch').mockResolvedValue({} as Response)
   })
@@ -84,44 +92,41 @@ describe('`sendEvent`', () => {
     vi.resetAllMocks()
   })
 
-  it('should send an event with the payload to the API `/api/event`', async () => {
-    await sendEvent('https://example.com', {
-      n: 'test',
-      u: 'http://example.com',
-      d: 'example.com',
-      r: 'http://referrer.com',
-      w: 1920,
-      h: 0,
-    })
+  it('should send an event with the payload to the API `/api/event`', () => {
+    sendEvent('https://example.com', eventPayload)
 
     expect(window.fetch).toHaveBeenCalledWith('https://example.com/api/event', {
       method: 'POST',
       headers: {
         'Content-Type': 'text/plain',
       },
-      body: JSON.stringify({
-        n: 'test',
-        u: 'http://example.com',
-        d: 'example.com',
-        r: 'http://referrer.com',
-        w: 1920,
-        h: 0,
-      }),
+      body: JSON.stringify(eventPayload),
     })
   })
 
-  it('should call the callback after the event is sent', async () => {
+  it('should call the callback', async () => {
     const callback = vi.fn()
 
-    await sendEvent('https://example.com', {
-      n: 'test',
-      u: 'http://example.com',
-      d: 'example.com',
-      r: 'http://referrer.com',
-      w: 1920,
-      h: 0,
-    }, callback)
+    await sendEvent('https://example.com', eventPayload, callback)
 
     expect(callback).toHaveBeenCalled()
+  })
+
+  // waiting for https://github.com/vitest-dev/vitest/pull/6056
+  // it('should call the callback after the request is complete', async () => {
+  //   const callback = vi.fn()
+
+  //   await sendEvent('https://example.com', eventPayload, callback)
+
+  //   expect(callback).toHaveBeenCalledAfter(window.fetch)
+  // })
+
+  it('should not call the callback if the request fails', async () => {
+    const callback = vi.fn()
+    vi.spyOn(window, 'fetch').mockRejectedValue(new Error('Failed to fetch'))
+
+    await sendEvent('https://example.com', eventPayload, callback).catch(() => {})
+
+    expect(callback).not.toHaveBeenCalled()
   })
 })

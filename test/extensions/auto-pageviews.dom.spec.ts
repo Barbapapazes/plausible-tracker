@@ -3,22 +3,24 @@ import { createPlausibleTracker } from '../../src/plausible'
 import { useAutoPageviews } from '../../src/extensions'
 
 describe('`auto-pageviews extensions`', () => {
-  const plausible = createPlausibleTracker({
-    ignoredHostnames: [],
-  })
+  const plausibleOptions = {
+    ignoredHostnames: [], // Ignore no hostnames to avoid ignoring localhost
+  }
+  const plausible = createPlausibleTracker(plausibleOptions)
+  const pageviews = useAutoPageviews(plausible)
 
   beforeEach(() => {
-    vi.spyOn(window, 'fetch')
+    vi.spyOn(window, 'fetch').mockResolvedValue({} as Response)
   })
 
   afterEach(() => {
-    history.replaceState({}, '', '/')
+    pageviews.cleanup()
     vi.restoreAllMocks()
+
+    history.replaceState({}, '', '/')
   })
 
   it('should send `pageview` events on install', () => {
-    const pageviews = useAutoPageviews(plausible)
-
     pageviews.install()
 
     expect(window.fetch).toHaveBeenCalledTimes(1)
@@ -37,13 +39,9 @@ describe('`auto-pageviews extensions`', () => {
         p: undefined,
       }),
     })
-
-    pageviews.cleanup()
   })
 
   it('should send event on new `popstate` event', () => {
-    const pageviews = useAutoPageviews(plausible)
-
     pageviews.install()
 
     window.dispatchEvent(new PopStateEvent('popstate'))
@@ -64,13 +62,11 @@ describe('`auto-pageviews extensions`', () => {
         p: undefined,
       }),
     })
-
-    pageviews.cleanup()
   })
 
   it('should send event on new `hashchange` event', () => {
     const pageviews = useAutoPageviews(createPlausibleTracker({
-      ignoredHostnames: [],
+      ...plausibleOptions,
       hashMode: true,
     }))
 
@@ -99,8 +95,6 @@ describe('`auto-pageviews extensions`', () => {
   })
 
   it('should send event when `history.pushState` is called', () => {
-    const pageviews = useAutoPageviews(plausible)
-
     pageviews.install()
 
     history.pushState({}, '', '/new')
@@ -121,13 +115,9 @@ describe('`auto-pageviews extensions`', () => {
         p: undefined,
       }),
     })
-
-    pageviews.cleanup()
   })
 
   it('should remove event listeners on cleanup', () => {
-    const pageviews = useAutoPageviews(plausible)
-
     pageviews.install()
     pageviews.cleanup()
 
@@ -139,9 +129,8 @@ describe('`auto-pageviews extensions`', () => {
   })
 
   it('should be able to modify options at any time', () => {
-    const pageviews = useAutoPageviews(plausible)
-
     pageviews.install()
+
     pageviews.setEventOptions({ props: { key: 'value' } })
 
     window.dispatchEvent(new PopStateEvent('popstate'))
@@ -162,7 +151,5 @@ describe('`auto-pageviews extensions`', () => {
         p: '{"key":"value"}',
       }),
     })
-
-    pageviews.cleanup()
   })
 })
