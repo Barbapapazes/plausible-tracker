@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { isOutboundLink, openLink, shouldFollowLink } from '../../../src/extensions/utils'
+import { isOutboundLink, openLink, shouldFollowLink } from '../../src/extensions/utils'
 
 describe('extensions utils', () => {
   let link: HTMLAnchorElement = document.createElement('a')
