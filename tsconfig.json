@@ -5,7 +5,7 @@
     "moduleResolution": "Node",
     "resolveJsonModule": true,
     "types": [
-      "node",
+      "node"
     ],
     "allowJs": true,
     "strict": true,
