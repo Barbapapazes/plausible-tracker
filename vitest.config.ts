@@ -8,6 +8,11 @@ export default defineConfig({
     exclude: [
       'test/e2e/**/*.spec.ts',
     ],
+    coverage: {
+      include: [
+        'src/**/*.ts',
+      ],
+    },
     environmentMatchGlobs: [
       // all tests ending with `.dom.spec.ts` will run in jsdom
       ['test/**/*.dom.spec.ts', 'jsdom'],
