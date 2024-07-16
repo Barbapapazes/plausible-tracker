@@ -50,6 +50,8 @@
     "lint:fix": "eslint . --fix",
     "release": "bumpp",
     "test": "vitest",
+    "test:e2e": "playwright test",
+    "dev": "pnpm run --filter playground dev",
     "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
