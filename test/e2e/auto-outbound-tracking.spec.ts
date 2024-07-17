@@ -59,7 +59,9 @@ test.describe('`auto-outbound-tracking`', () => {
     expect(page.url()).toBe('http://localhost:5173/auto-outbound-tracking')
   })
 
-  test('should respect rel="noopener noreferrer" attribute', async ({ page }) => {
+  test('should respect rel="noopener noreferrer" attribute', async ({ page, browserName }) => {
+    test.skip(browserName === 'webkit', 'WebKit does not remove localhost referrer')
+
     await page.route('**/api/event', async (route) => {
       const data = JSON.parse(route.request().postData()!)
       expect(data.n).toBe('Outbound Link: Click')
