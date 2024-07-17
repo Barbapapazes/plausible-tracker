@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    File Downloads Tracking
+  </title>
+</head>
+<body>
+  <a download href="/file.svg">Download SVG</a>
+  <a href="/file.svg">Download SVG without download attribute</a>
+  <a href="/file.svg" target="_blank">Download SVG targeting blank</a>
+  <a href="https://localhost:5173/file.svg">Download SVG with full URL</a>
+
+  <a download href="/document.pdf">Download PDF</a>
+
+  <a href="/">Simple link</a>
+
+  <button id="cleanup">Cleanup</button>
+
+  <script type="module" src="/src/file-downloads-tracking.ts"></script>
+</body>
+</html>

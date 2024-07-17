@@ -89,7 +89,7 @@ test.describe('`auto-outbound-tracking`', () => {
     await page.waitForURL('https://example.com/')
   })
 
-  test('should track link after being added to the DOM', async ({ page }) => {
+  test('should track links after being added to the DOM', async ({ page }) => {
     await page.route('**/api/event', async (route) => {
       const data = JSON.parse(route.request().postData()!)
       expect(data.n).toBe('Outbound Link: Click')
