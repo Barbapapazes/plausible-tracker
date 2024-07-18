@@ -15,12 +15,12 @@ import type { EventName, EventOptions, EventPayload, Plausible, PlausibleOptions
  * @returns Plausible tracker
  */
 export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) {
-  const protocol = location.protocol
+  const protocol = window.location.protocol
 
   const defaultOptions: PlausibleOptions = {
     enabled: true,
     hashMode: false,
-    domain: location.hostname,
+    domain: window.location.hostname,
     apiHost: 'https://plausible.io',
     ignoredHostnames: ['localhost'],
     ignoreSubDomains: false,
@@ -56,7 +56,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
       options?.callback?.()
     }
     else {
-      sendEvent(payload, options?.callback)
+      return sendEvent(payload, options?.callback)
     }
   }
 
@@ -64,7 +64,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
    * Send a pageview event.
    */
   function trackPageview(options?: EventOptions) {
-    trackEvent('pageview', options)
+    return trackEvent('pageview', options)
   }
 
   return {
