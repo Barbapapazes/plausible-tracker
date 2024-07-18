@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.5.2
+
+[compare changes](https://github.com/barbapapazes/plausible-tracker/compare/v0.5.1...v0.5.2)
+
+### 🩹 Fixes
+
+- Do not throw if request fails ([37ffafb](https://github.com/barbapapazes/plausible-tracker/commit/37ffafb))
+
+### ❤️ Contributors
+
+- Barbapapazes <e.soubiran25@gmail.com>
+
 ## v0.5.1
 
 [compare changes](https://github.com/barbapapazes/plausible-tracker/compare/v0.5.0...v0.5.1)
