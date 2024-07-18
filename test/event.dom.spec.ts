@@ -129,4 +129,10 @@ describe('`sendEvent`', () => {
 
     expect(callback).not.toHaveBeenCalled()
   })
+
+  it('should not throw if the request fails', async () => {
+    vi.spyOn(window, 'fetch').mockRejectedValue(new Error('Failed to fetch'))
+
+    await expect(sendEvent('https://example.com', eventPayload)).resolves.not.toThrow()
+  })
 })

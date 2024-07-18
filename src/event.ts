@@ -84,5 +84,5 @@ export function sendEvent(
     body: JSON.stringify(payload),
   }).then(() => {
     callback?.()
-  })
+  }).catch(() => {})
 }
