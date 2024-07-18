@@ -48,18 +48,19 @@
     "build": "unbuild",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "release": "bumpp",
-    "test": "vitest",
+    "release": "npm run lint && npm run test && npm run test:e2e && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "test:e2e": "playwright test",
     "dev": "pnpm run --filter playground dev",
-    "prepublishOnly": "pnpm run build"
+    "prepack": "npm run build"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.16.0",
     "@playwright/test": "^1.45.1",
     "@types/node": "^18.19.31",
     "@vitest/coverage-v8": "^1.5.2",
-    "bumpp": "^9.4.0",
+    "changelogen": "^0.5.5",
     "eslint": "^8.57.0",
     "happy-dom": "^13.10.1",
     "jsdom": "^24.1.0",
