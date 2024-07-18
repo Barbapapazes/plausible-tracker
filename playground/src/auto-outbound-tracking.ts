@@ -8,3 +8,7 @@ const plausible = createPlausibleTracker({
 const autoOutboundTracking = useAutoOutboundTracking(plausible)
 
 autoOutboundTracking.install()
+
+document.getElementById('cleanup')!.addEventListener('click', () => {
+  autoOutboundTracking.cleanup()
+})
