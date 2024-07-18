@@ -74,7 +74,7 @@ export function sendEvent(
   apiHost: string,
   /** The event payload */
   payload: EventPayload,
-  callback?: (args?: CallbackArgs) => void,
+  callback?: (args: CallbackArgs) => void,
 ) {
   return fetch(`${apiHost}/api/event`, {
     method: 'POST',

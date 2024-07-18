@@ -65,7 +65,7 @@ export interface PlausibleOptions {
 }
 
 export interface CallbackArgs {
-  readonly status?: number
+  readonly status: number | null
 }
 
 export interface EventOptions extends EventProps {
@@ -73,7 +73,7 @@ export interface EventOptions extends EventProps {
   /**
    * Callback to be called after the event is sent.
    */
-  callback?: (args?: CallbackArgs) => void
+  callback?: (args: CallbackArgs) => void
 }
 
 /**

@@ -30,7 +30,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
   // Options does not change later.
   const plausibleOptions = { ...defaultOptions, ...initOptions } satisfies PlausibleOptions
 
-  const sendEvent = (payload: EventPayload, callback?: (args?: CallbackArgs) => void) => _sendEvent(plausibleOptions.apiHost, payload, callback)
+  const sendEvent = (payload: EventPayload, callback?: (args: CallbackArgs) => void) => _sendEvent(plausibleOptions.apiHost, payload, callback)
 
   /**
    * Send a custom event.
@@ -53,7 +53,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
         console.info(`[Plausible] ${eventName}`, payload)
 
       // Call the callback if it exists since we are not sending the event.
-      options?.callback?.()
+      options?.callback?.({ status: null })
     }
     else {
       return sendEvent(payload, options?.callback)
