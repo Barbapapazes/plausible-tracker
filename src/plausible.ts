@@ -48,7 +48,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
     // Ignore events if the protocol is file, the hostname should be ignored or the user excluded himself.
     if (isFile(protocol) || isIgnored(plausibleOptions.domain, plausibleOptions.ignoredHostnames, plausibleOptions.ignoreSubDomains) || isUserSelfExcluded()) {
       // Only log ignored events if the option is enabled.
-      if (!plausibleOptions.logIgnored)
+      if (plausibleOptions.logIgnored)
         // eslint-disable-next-line no-console
         console.info(`[Plausible] ${eventName}`, payload)
 
