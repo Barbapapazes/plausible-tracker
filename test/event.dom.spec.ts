@@ -1,6 +1,6 @@
+import type { EventPayload } from '../src/types'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createEventData, isUserSelfExcluded, sendEvent } from '../src/event'
-import type { EventPayload } from '../src/types'
 
 describe('`isUserSelfExcluded`', () => {
   afterEach(() => {

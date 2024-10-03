@@ -1,7 +1,7 @@
+import type { PlausibleOptions } from '../src/types'
 /* eslint-disable no-console */
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { createPlausibleTracker } from '../src/plausible'
-import type { PlausibleOptions } from '../src/types'
 
 describe('`createPlausibleTracker`', () => {
   it('should return `trackEvent`, `trackPageview` and `options`', () => {
