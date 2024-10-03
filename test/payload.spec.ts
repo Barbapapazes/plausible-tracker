@@ -1,6 +1,6 @@
+import type { PlausibleOptions } from '../src/types'
 import { describe, expect, it } from 'vitest'
 import { createPayload } from '../src/payload'
-import type { PlausibleOptions } from '../src/types'
 
 describe('payload', () => {
   const plausibleOptions: Required<PlausibleOptions> = {
