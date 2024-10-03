@@ -95,7 +95,8 @@ describe('`createPlausibleTracker`', () => {
     const callback = vi.fn()
     const plausibleOptions = {
       ignoredHostnames: [], // Ignore no hostnames to avoid ignoring localhost
-    }
+      logIgnored: true,
+    } satisfies Partial<PlausibleOptions>
     const plausible = createPlausibleTracker(plausibleOptions)
 
     beforeEach(() => {
@@ -226,6 +227,7 @@ describe('`createPlausibleTracker`', () => {
       const plausible = createPlausibleTracker({
         domain: 'example.com',
         ignoredHostnames: ['example.com'],
+        logIgnored: true,
       })
 
       plausible.trackEvent('test', {
@@ -250,6 +252,7 @@ describe('`createPlausibleTracker`', () => {
         domain: 'sub.example.com',
         ignoredHostnames: ['example.com'],
         ignoreSubDomains: true,
+        logIgnored: true,
       })
 
       plausible.trackEvent('test', {
@@ -291,7 +294,7 @@ describe('`createPlausibleTracker`', () => {
 
     it('should allow to ignore log', () => {
       const plausible = createPlausibleTracker({
-        logIgnored: true,
+        logIgnored: false,
       })
 
       plausible.trackEvent('test', {
