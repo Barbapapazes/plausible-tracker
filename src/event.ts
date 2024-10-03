@@ -43,7 +43,8 @@ export function isUserSelfExcluded(): boolean {
   try {
     return localStorage.getItem('plausible_ignore') === 'true'
   }
-  catch (e) {
+  // eslint-disable-next-line unused-imports/no-unused-vars
+  catch (_) {
     return false
   }
 }

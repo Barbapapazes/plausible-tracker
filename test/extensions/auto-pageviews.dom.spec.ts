@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import { createPlausibleTracker } from '../../src/plausible'
 import { useAutoPageviews } from '../../src/extensions'
+import { createPlausibleTracker } from '../../src/plausible'
 
 describe('`auto-pageviews extensions`', () => {
   const plausibleOptions = {

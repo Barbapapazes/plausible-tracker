@@ -3,9 +3,9 @@
  * @see https://github.com/plausible/analytics/blob/master/tracker/src/customEvents.js#L77
  */
 
+import type { CallbackArgs, EventName, EventOptions, EventPayload, Plausible, PlausibleOptions } from './types'
 import { sendEvent as _sendEvent, createEventData, isFile, isIgnored, isUserSelfExcluded } from './event'
 import { createPayload } from './payload'
-import type { CallbackArgs, EventName, EventOptions, EventPayload, Plausible, PlausibleOptions } from './types'
 
 /**
  * Create a Plausible tracker.
