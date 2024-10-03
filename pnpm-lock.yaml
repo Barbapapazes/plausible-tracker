@@ -45,8 +45,8 @@ importers:
   playground:
     dependencies:
       '@barbapapazes/plausible-tracker':
-        specifier: latest
-        version: 0.4.0
+        specifier: workspace:*
+        version: link:..
     devDependencies:
       typescript:
         specifier: ^5.6.2
@@ -228,9 +228,6 @@ packages:
   '@babel/types@7.24.9':
     resolution: {integrity: sha512-xm8XrMKz0IlUdocVbYJe0Z9xEgidU7msskG8BbhnTPK/HZ2z/7FP7ykqPgrUH+C+r414mNfNWam1f2vqOjqjYQ==}
     engines: {node: '>=6.9.0'}
-
-  '@barbapapazes/plausible-tracker@0.4.0':
-    resolution: {integrity: sha512-4hhXK62ORb4feJfjnIILXRnb6xfejHM6yvGCid6MwNdKiQyj6YLW0M779zXLH5IBS4mQObmrNul2HUleeavSKw==}
 
   '@bcoe/v8-coverage@0.2.3':
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
@@ -3415,8 +3412,6 @@ snapshots:
       '@babel/helper-string-parser': 7.24.8
       '@babel/helper-validator-identifier': 7.24.7
       to-fast-properties: 2.0.0
-
-  '@barbapapazes/plausible-tracker@0.4.0': {}
 
   '@bcoe/v8-coverage@0.2.3': {}
 

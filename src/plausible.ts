@@ -3,7 +3,7 @@
  * @see https://github.com/plausible/analytics/blob/master/tracker/src/customEvents.js#L77
  */
 
-import type { EventName, EventOptions, EventPayload, Plausible, PlausibleOptions } from './types'
+import type { CallbackArgs, EventName, EventOptions, EventPayload, Plausible, PlausibleOptions } from './types'
 import { sendEvent as _sendEvent, createEventData, isFile, isIgnored, isUserSelfExcluded } from './event'
 import { createPayload } from './payload'
 
@@ -30,7 +30,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
   // Options does not change later.
   const plausibleOptions = { ...defaultOptions, ...initOptions } satisfies PlausibleOptions
 
-  const sendEvent = (payload: EventPayload, callback?: () => void) => _sendEvent(plausibleOptions.apiHost, payload, callback)
+  const sendEvent = (payload: EventPayload, callback?: (args: CallbackArgs) => void) => _sendEvent(plausibleOptions.apiHost, payload, callback)
 
   /**
    * Send a custom event.
@@ -53,7 +53,7 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
         console.info(`[Plausible] ${eventName}`, payload)
 
       // Call the callback if it exists since we are not sending the event.
-      options?.callback?.()
+      options?.callback?.({ status: null })
     }
     else {
       return sendEvent(payload, options?.callback)
@@ -66,6 +66,11 @@ export function createPlausibleTracker(initOptions?: Partial<PlausibleOptions>) 
   function trackPageview(options?: EventOptions) {
     return trackEvent('pageview', options)
   }
+
+  /**
+   * Add Plausible script to the page to enable site verification.
+   */
+  window.plausible = trackEvent
 
   return {
     trackEvent,

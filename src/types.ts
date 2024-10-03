@@ -64,12 +64,16 @@ export interface PlausibleOptions {
   readonly logIgnored: boolean
 }
 
+export interface CallbackArgs {
+  readonly status: number | null
+}
+
 export interface EventOptions extends EventProps {
   data?: Partial<EventData>
   /**
    * Callback to be called after the event is sent.
    */
-  callback?: () => void
+  callback?: (args: CallbackArgs) => void
 }
 
 /**

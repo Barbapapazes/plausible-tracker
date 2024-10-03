@@ -1,4 +1,4 @@
-import type { EventData, EventPayload } from './types'
+import type { CallbackArgs, EventData, EventPayload } from './types'
 
 /**
  * Check if the protocol is file
@@ -75,7 +75,7 @@ export function sendEvent(
   apiHost: string,
   /** The event payload */
   payload: EventPayload,
-  callback?: () => void,
+  callback?: (args: CallbackArgs) => void,
 ) {
   return fetch(`${apiHost}/api/event`, {
     method: 'POST',
@@ -83,7 +83,7 @@ export function sendEvent(
       'Content-Type': 'text/plain',
     },
     body: JSON.stringify(payload),
-  }).then(() => {
-    callback?.()
+  }).then((response: Response) => {
+    callback?.({ status: response.status })
   }).catch(() => {})
 }
