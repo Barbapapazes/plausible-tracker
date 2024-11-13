@@ -68,7 +68,7 @@ export interface CallbackArgs {
   readonly status: number | null
 }
 
-export interface EventOptions extends EventProps {
+export interface EventOptions extends EventProps, EventRevenue {
   data?: Partial<EventData>
   /**
    * Callback to be called after the event is sent.
@@ -84,6 +84,25 @@ export interface EventProps {
    * Properties to be bound to the event.
    */
   readonly props?: { readonly [propName: string]: string | number | boolean }
+}
+
+/**
+ * Shape of the event revenue
+ */
+export interface EventRevenue {
+  /**
+   * Revenue data to be bound to the event.
+   */
+  readonly revenue?: {
+    /**
+     * The currency of the revenue (ISO 4217).
+     */
+    readonly currency: string
+    /**
+     * The amount of the revenue.
+     */
+    readonly amount: string | number
+  }
 }
 
 /**
@@ -123,4 +142,6 @@ export interface EventPayload {
   readonly w: Window['innerWidth']
   readonly h: 1 | 0
   readonly p?: string
+  readonly m?: string
+  readonly $?: EventRevenue['revenue']
 }
