@@ -15,6 +15,10 @@ document.getElementById('btn')?.addEventListener('click', () => {
   plausible.trackEvent('click', { props: { btn: 'btn' } })
 })
 
+document.getElementById('ecommerce')?.addEventListener('click', () => {
+  plausible.trackEvent('Purchase', { revenue: { currency: 'USD', amount: '10.29' } })
+})
+
 // Use this to test the auto pageview tracking
 document.getElementById('navigation')?.addEventListener('click', () => {
   const url = new URL(location.href)

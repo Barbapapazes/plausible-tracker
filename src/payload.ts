@@ -9,6 +9,7 @@ export function createPayload(eventName: string, plausibleOptions: Required<Plau
     w: data.deviceWidth,
     h: plausibleOptions.hashMode ? 1 : 0,
     p: options && options.props ? JSON.stringify(options.props) : undefined,
+    $: options && options.revenue ? options.revenue : undefined,
   }
 
   return payload
