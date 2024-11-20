@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.5.5
+
+[compare changes](https://github.com/barbapapazes/plausible-tracker/compare/v0.5.4...v0.5.5)
+
+### 🏡 Chore
+
+- Update deps ([1059271](https://github.com/barbapapazes/plausible-tracker/commit/1059271))
+
+### ✅ Tests
+
+- Add revenue ([4714458](https://github.com/barbapapazes/plausible-tracker/commit/4714458))
+
+### ❤️ Contributors
+
+- Barbapapazes <e.soubiran25@gmail.com>
+
 ## v0.5.4
 
 [compare changes](https://github.com/barbapapazes/plausible-tracker/compare/v0.5.3...v0.5.4)
