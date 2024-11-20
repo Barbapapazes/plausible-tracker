@@ -19,7 +19,12 @@ describe('payload', () => {
   }
 
   it('should be correctly formed', () => {
-    const payload = createPayload('test', plausibleOptions, data)
+    const payload = createPayload('test', plausibleOptions, data, {
+      revenue: {
+        currency: 'USD',
+        amount: 100,
+      },
+    })
 
     expect(payload).toEqual({
       n: 'test',
@@ -29,6 +34,7 @@ describe('payload', () => {
       w: 1920,
       h: 0,
       p: undefined,
+      $: { currency: 'USD', amount: 100 },
     })
   })
 
