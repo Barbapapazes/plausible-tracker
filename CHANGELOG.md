@@ -1,6 +1,23 @@
 # Changelog
 
 
+## v0.5.4
+
+[compare changes](https://github.com/barbapapazes/plausible-tracker/compare/v0.5.3...v0.5.4)
+
+### 🚀 Enhancements
+
+- Add ecommerce tracking with revenue data ([#19](https://github.com/barbapapazes/plausible-tracker/pull/19))
+
+### 🤖 CI
+
+- Remove `release.yml` file ([#18](https://github.com/barbapapazes/plausible-tracker/pull/18))
+
+### ❤️ Contributors
+
+- Andreas Sonnleitner ([@asonnleitner](http://github.com/asonnleitner))
+- Kabir Sharma ([@SharmaKabir](http://github.com/SharmaKabir))
+
 ## v0.5.3
 
 [compare changes](https://github.com/barbapapazes/plausible-tracker/compare/v0.5.2...v0.5.3)
