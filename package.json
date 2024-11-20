@@ -1,7 +1,7 @@
 {
   "name": "@barbapapazes/plausible-tracker",
   "type": "module",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "packageManager": "pnpm@9.14.2",
   "description": "Fork of frontend tracker to interact with Plausible Analytics",
   "license": "MIT",

@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.5.6
+
+[compare changes](https://github.com/barbapapazes/plausible-tracker/compare/v0.5.5...v0.5.6)
+
+### 🏡 Chore
+
+- Fix lockfile ([5588065](https://github.com/barbapapazes/plausible-tracker/commit/5588065))
+
+### ❤️ Contributors
+
+- Barbapapazes <e.soubiran25@gmail.com>
+
 ## v0.5.5
 
 [compare changes](https://github.com/barbapapazes/plausible-tracker/compare/v0.5.4...v0.5.5)
